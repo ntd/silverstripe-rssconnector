@@ -106,7 +106,9 @@ class RssContentSource extends ExternalContentSource {
 	}
 
 	public function getRoot() {
-		return $this;
+		$item = $this->getClient()->get_item();
+        if ($item)
+            return new RssContentItem($this, $item);
 	}
 
 	public function stageChildren() {
