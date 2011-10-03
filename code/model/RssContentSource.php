@@ -127,10 +127,11 @@ class RssContentSource extends ExternalContentSource {
 	 */
 	public function getClient() {
 		if (!$this->client) {
-			$this->client = new SimplePie($this->Url);
-			$this->client->enable_cache(true);
-			$this->client->set_cache_duration($this->getCacheLifetime());
+			$this->client = new SimplePie($this->Url, TEMP_FOLDER);
 			$this->client->set_cache_location(TEMP_FOLDER);
+			$this->client->set_cache_duration($this->getCacheLifetime());
+			$this->client->set_feed_url($this->Url);
+			$this->client->enable_cache(true);
 		}
 
 		return $this->client;
